@@ -100,11 +100,38 @@
 | 问答 | QA | YYYY-MM-DD | QA-2026-04-08-RAG边界.md |
 | 健康报告 | Health | YYYY-MM-DD | Health-2026-04-08.md |
 
-### 4. Graphify 集成（可选）
-支持代码文件的知识图谱构建：
-- 在 `raw/code/` 中存放代码文件
-- 使用 Graphify 提取代码结构
-- 生成 `wiki/graphify/` 中的知识图谱
+### 4. Graphify 集成（代码知识图谱）
+
+支持代码文件的知识图谱构建，增强知识库的完整性。
+
+#### 目录结构
+- `raw/code/` - 代码文件（Python, JavaScript, TypeScript 等）
+- `wiki/graphify/structure/` - 代码结构信息
+- `wiki/graphify/reports/` - 图谱分析报告
+
+#### 触发方式
+当检测到 `raw/code/` 中有新代码时：
+1. 运行 `/graphify ./raw/code --no-viz`
+2. 分析生成的 `GRAPH_REPORT.md`
+3. 提取关键概念和关系
+4. 与现有概念体系集成
+
+#### 提取内容
+- **类和函数结构** - 通过 AST 分析
+- **设计意图** - 从注释中提取 (NOTE, IMPORTANT, HACK, TODO)
+- **调用关系** - 函数间的依赖关系
+- **跨文件引用** - import 和 require 关系
+
+#### 集成到 Wiki
+将代码概念转换为 Wiki 概念条目：
+- 代码类 → `C-XXX-类名.md`
+- 重要函数 → `C-XXX-函数名.md`  
+- 设计模式 → `C-XXX-模式名.md`
+
+#### 使用场景
+- 理解代码库结构
+- 追踪设计决策
+- 发现代码与文档的对应关系
 
 ## 双向链接规范
 

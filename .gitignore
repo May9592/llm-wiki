@@ -32,3 +32,6 @@ graphify-out/cache/
 
 # Settings (local configurations)
 .claude/settings.local.json
+
+# Graphify outputs (optional - comment out if you want to track graphs)
+# graphify-out/*/graphify-out/

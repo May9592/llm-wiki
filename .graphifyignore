@@ -1,0 +1,50 @@
+# Graphify ignore patterns
+# Similar to .gitignore but for knowledge graph extraction
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Git
+.git/
+.gitignore
+
+# Obsidian
+.obsidian/
+
+# Outputs
+graphify-out/
+outputs/
+publish/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Large files that shouldn't be processed
+*.pdf  # unless you want to extract from PDFs
+*.zip
+*.tar
+*.gz
+
+# Test files
+*_test.py
+test_*.py
+*.test.js
