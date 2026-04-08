@@ -1,0 +1,273 @@
+# Application Configuration
+# 应用配置文件示例
+#
+# 展示配置管理和环境变量处理
+#
+# WHY: 使用 YAML 而不是 JSON
+# - 支持注释
+# - 更易读
+# - 支持多行字符串
+
+# ============ 应用基础配置 ============
+application:
+  name: "demo-app"
+  version: "1.0.0"
+  environment: "development"  # development | staging | production
+  debug: true
+
+  # IMPORTANT: 时区设置会影响时间处理
+  timezone: "Asia/Shanghai"
+
+  # 日志配置
+  logging:
+    level: "info"  # debug | info | warn | error
+    format: "json"  # json | text
+    output: "stdout"  # stdout | file
+
+    # 文件输出配置
+    file:
+      path: "./logs/app.log"
+      max_size: "100MB"
+      max_backups: 10
+      max_age: 30  # days
+
+# ============ 服务器配置 ============
+server:
+  # HTTP 服务器
+  http:
+    host: "0.0.0.0"
+    port: 8080
+    # HACK: 开发环境使用 HTTP，生产环境应该用 HTTPS
+    ssl_enabled: false
+
+    # SSL 配置（生产环境）
+    ssl:
+      cert_file: "./certs/server.crt"
+      key_file: "./certs/server.key"
+
+    # 超时设置
+    timeouts:
+      read: 30s
+      write: 30s
+      idle: 120s
+
+  # GraphQL API
+  graphql:
+    enabled: true
+    path: "/graphql"
+    # TODO: 添加 Apollo Studio 配置
+    playground: true
+
+# ============ 数据库配置 ============
+database:
+  # 主数据库
+  primary:
+    driver: "postgresql"  # mysql | postgresql | sqlite | mongodb
+
+    # 连接信息
+    host: "localhost"
+    port: 5432
+    name: "demo_app"
+    user: "db_user"
+    # IMPORTANT: 密码应该从环境变量读取
+    password: "${DB_PASSWORD}"
+
+    # 连接池配置
+    pool:
+      max_connections: 20
+      min_connections: 5
+      max_idle_time: 10m
+      connection_lifetime: 1h
+
+    # WHY: 使用 SSL 连接数据库
+    ssl_mode: "require"
+
+  # Redis 缓存
+  cache:
+    enabled: true
+    host: "localhost"
+    port: 6379
+    db: 0
+    password: "${REDIS_PASSWORD}"
+
+    # 缓存策略
+    ttl:
+      default: 3600  # 1 hour
+      short: 300     # 5 minutes
+      long: 86400    # 1 day
+
+# ============ 消息队列配置 ============
+queue:
+  # 任务队列
+  tasks:
+    driver: "redis"  # redis | rabbitmq | sqs
+    namespace: "tasks"
+
+    # 并发配置
+    workers: 4
+    max_retries: 3
+    retry_delay: 60s
+
+    # 任务优先级
+    priorities:
+      high: 1
+      normal: 5
+      low: 10
+
+  # 事件流
+  events:
+    driver: "kafka"  # kafka | rabbitmq
+    topics:
+      - "user-events"
+      - "system-events"
+
+    # 消费者组
+    consumer_group: "app-consumers"
+
+# ============ 存储配置 ============
+storage:
+  # 文件存储
+  files:
+    driver: "s3"  # local | s3 | azure | gcs
+
+    # 本地存储配置
+    local:
+      base_path: "./storage"
+      public_url: "http://localhost:8080/files"
+
+    # S3 配置
+    s3:
+      region: "us-east-1"
+      bucket: "demo-app-files"
+      access_key: "${AWS_ACCESS_KEY_ID}"
+      secret_key: "${AWS_SECRET_ACCESS_KEY}"
+
+    # 文件限制
+    limits:
+      max_file_size: "100MB"
+      allowed_types:
+        - "image/jpeg"
+        - "image/png"
+        - "application/pdf"
+
+# ============ 认证配置 ============
+auth:
+  # JWT 配置
+  jwt:
+    secret: "${JWT_SECRET}"
+    algorithm: "HS256"
+    expiration: 24h
+
+  # OAuth 提供商
+  oauth:
+    google:
+      enabled: true
+      client_id: "${GOOGLE_CLIENT_ID}"
+      client_secret: "${GOOGLE_CLIENT_SECRET}"
+
+    github:
+      enabled: true
+      client_id: "${GITHUB_CLIENT_ID}"
+      client_secret: "${GITHUB_CLIENT_SECRET}"
+
+  # 会话管理
+  session:
+    store: "redis"  # cookie | redis
+    cookie_name: "session_id"
+    max_age: 604800  # 7 days
+
+# ============ 邮件配置 ============
+email:
+  enabled: true
+
+  # SMTP 配置
+  smtp:
+    host: "smtp.gmail.com"
+    port: 587
+    user: "${EMAIL_USER}"
+    password: "${EMAIL_PASSWORD}"
+    from: "noreply@demo-app.com"
+
+  # 模板配置
+  templates:
+    path: "./templates/emails"
+    # TODO: 添加多语言支持
+    default_language: "zh-CN"
+
+# ============ 监控配置 ============
+monitoring:
+  # 性能监控
+  performance:
+    enabled: true
+    sample_rate: 0.1  # 10% sampling
+
+  # 错误追踪
+  errors:
+    enabled: true
+    dsn: "${SENTRY_DSN}"
+    environment: "${APP_ENV}"
+
+  # 指标收集
+  metrics:
+    enabled: true
+    # Prometheus 端点
+    endpoint: "/metrics"
+
+# ============ 功能开关 ============
+features:
+  # 新功能开关
+  new_ui: false
+  beta_features: false
+
+  # 实验性功能
+  experimental:
+    ai_recommendations: true
+    advanced_analytics: false
+
+# ============ 第三方服务 ============
+services:
+  # OpenAI API
+  openai:
+    enabled: true
+    api_key: "${OPENAI_API_KEY}"
+    model: "gpt-4"
+    max_tokens: 2000
+
+  # Stripe 支付
+  stripe:
+    enabled: false
+    api_key: "${STRIPE_API_KEY}"
+    webhook_secret: "${STRIPE_WEBHOOK_SECRET}"
+
+# ============ 速率限制 ============
+rate_limit:
+  enabled: true
+
+  # 全局限制
+  global:
+    requests_per_minute: 60
+    requests_per_hour: 1000
+
+  # API 端点限制
+  endpoints:
+    "/api/v1/search":
+      requests_per_minute: 30
+
+    "/api/v1/export":
+      requests_per_hour: 10
+
+# ============ 开发工具 ============
+development:
+  # 热重载
+  hot_reload: true
+
+  # 调试工具
+  debug_toolbar: true
+
+  # 模拟数据
+  seed_data: true
+
+  # API 文档
+  swagger:
+    enabled: true
+    path: "/docs"
