@@ -5,6 +5,31 @@
 > **✅ 当前状态**: 功能已完全集成，通过全部测试，可以立即使用！
 > **📊 测试结果**: 效率提升 **600-1800 倍**，查询响应 <1 秒
 > **📚 知识库**: 已完成 Graphify 文档编译，详见 `[[wiki/summaries/S-016-Graphify知识图谱工具完整指南|S-016: Graphify知识图谱工具完整指南]]`
+> **🔧 技能配置**: Graphify skill 已全局安装，自动触发
+
+---
+
+## 🎯 Skill 自动触发
+
+### 如何激活 Graphify
+
+Graphify skill 已经全局安装并配置好自动触发。当你在 Claude Code 中输入 `/graphify` 时，skill 会自动激活。
+
+**全局配置位置**: `~/.claude/CLAUDE.md`
+
+**触发条件**:
+```markdown
+# graphify
+- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph
+  Trigger: `/graphify`
+  When the user types `/graphify`, invoke the Skill tool with skill: "graphify"
+```
+
+### 无需额外配置
+
+- ✅ **自动识别**: 输入 `/graphify` 即可自动触发
+- ✅ **全局可用**: 在任何项目中都可以使用
+- ✅ **功能完整**: 支持所有 Graphify 功能（生成、查询、路径查找、解释）
 
 ---
 
