@@ -57,11 +57,30 @@ graphify . --no-viz
 
 # 生成可视化
 graphify . --html
+```
 
-# 查询知识图谱
-graphify query "数据处理流程是怎样的？"
-graphify path "DocumentReader" "SummaryGenerator"
-graphify explain "UserRepository"
+### 查询知识图谱
+
+**命令行方式**（仅支持 query）：
+```bash
+cd raw/code
+
+# 查询主要模块（使用英文关键词）
+graphify query "main modules"
+graphify query "data processing"
+graphify query "user service"
+graphify query "graph algorithms"
+
+# 深度优先搜索
+graphify query "pipeline" --dfs
+```
+
+**Claude Code 方式**（完整功能）：
+```bash
+# 在 Claude Code 对话中
+/graphify query "数据处理流程"
+/graphify path "DocumentReader" "SummaryGenerator"
+/graphify explain "UserRepository"
 ```
 
 ### 示例查询
