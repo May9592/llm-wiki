@@ -50,13 +50,35 @@
 
 ### 生成知识图谱
 
+> **重要**: 图谱生成功能只在 **Claude Code** 中可用
+
+#### 在 Claude Code 中
+
 ```bash
 # 基础运行（仅 AST 分析，无 LLM 成本）
-cd raw/code
+/graphify raw/code
+
+# 只生成报告，不生成可视化
+/graphify raw/code --no-viz
+
+# 生成 HTML 可视化
+/graphify raw/code --html
+
+# 生成 SVG
+/graphify raw/code --svg
+```
+
+#### 命令行工具
+
+命令行工具**只能查询已存在的图谱**，不能生成新图谱：
+
+```bash
+# ❌ 这不会工作 - 命令行工具不支持
 graphify . --no-viz
 
-# 生成可视化
-graphify . --html
+# ✅ 使用 Claude Code Skill 生成
+# 在 Claude Code 对话中输入
+/graphify .
 ```
 
 ### 查询知识图谱

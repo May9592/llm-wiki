@@ -2,17 +2,36 @@
 
 ## 🎯 你想做什么？
 
-### 查询代码库
+### 生成新图谱
+> **只能在 Claude Code 中使用**
+
+```bash
+# 在 Claude Code 对话中输入
+/graphify raw/code              # 完整生成
+/graphify raw/code --no-viz     # 只生成报告
+/graphify raw/code --html       # 包含可视化
+```
+
+### 查询现有图谱
+> **两种方式都可以**
+
 ```bash
 # 命令行工具（在 raw/code 目录）
 graphify query "main modules"
 graphify query "data pipeline"
 graphify query "user service"
 
-# Claude Code（完整功能）
+# Claude Code（支持中文）
 /graphify query "主要模块是什么？"
-/graphify path "类A" "类B"
-/graphify explain "类名"
+/graphify query "数据处理流程"
+```
+
+### 高级查询（仅 Claude Code）
+```bash
+# 在 Claude Code 对话中
+/graphify path "KnowledgeCompiler" "SummaryGenerator"
+/graphify explain "DataPipeline"
+/graphify query "设计意图" --dfs
 ```
 
 ### 查看报告
@@ -20,19 +39,24 @@ graphify query "user service"
 cat raw/code/graphify-out/GRAPH_REPORT.md
 ```
 
-### 重新生成图谱
-```bash
-cd raw/code
-graphify . --no-viz
-```
-
 ## ❗ 重要提示
 
-| 功能 | 命令行 | Claude Code |
-|------|--------|-------------|
-| 查询 | ✅ graphify query | ✅ /graphify query |
-| 路径 | ❌ 不支持 | ✅ /graphify path |
-| 解释 | ❌ 不支持 | ✅ /graphify explain |
+### 两种使用方式
+
+| 功能 | 命令行工具 | Claude Code Skill |
+|------|-----------|-------------------|
+| **生成图谱** | ❌ 不支持 | ✅ `/graphify .` |
+| **查询图谱** | ✅ `graphify query` | ✅ `/graphify query` |
+| **路径查找** | ❌ 不支持 | ✅ `/graphify path` |
+| **节点解释** | ❌ 不支持 | ✅ `/graphify explain` |
+| **可视化** | ❌ 不支持 | ✅ `--html` |
+
+### 关键区别
+
+```
+命令行工具 (graphify)     → 只能查询现有图谱
+Claude Code (/graphify)   → 可以生成和查询图谱
+```
 
 ## 🔑 查询关键词（英文）
 
