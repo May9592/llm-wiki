@@ -20,6 +20,7 @@
 | S-012 | VideoReTalking | OpenTalker | - | [[S-012-VideoReTalking音视频同步|S-012: VideoReTalking]] | 已编译 |
 | S-013 | FunClip | modelscope | - | [[S-013-FunClip视频语音识别剪辑|S-013: FunClip]] | 已编译 |
 | S-014 | agency-agents | msitarzewski | - | [[S-014-Agency-Agents集合|S-014: Agency Agents集合]] | 已编译 |
+| S-016 | Graphify 知识图谱工具 | safishamsi | 2026-04-08 | [[S-016-Graphify知识图谱工具完整指南|S-016: Graphify知识图谱工具完整指南]] | 已编译 |
 | S-015 | 用 LLM + Obsidian 构建个人知识库 | yanhua1010 | 2026-02-08 | 原始来源文档 | 已整合 |
 
 ## Podcasts
@@ -30,5 +31,7 @@
 
 
 *最后更新：2026-04-08*
+
+> 💡 已移除讨论相关内容，专注于文章和论文的知识编译
 
 > 💡 已移除讨论相关内容，专注于文章和论文的知识编译

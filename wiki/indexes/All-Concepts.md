@@ -47,6 +47,8 @@
 | C-020 | AI Agent | S-014 | 已创建 |
 | C-021 | Agentic Workflow | S-014 | 已创建 |
 | C-022 | Multi-Agent Coordination | S-014 | 已创建 |
+| C-023 | 社区发现 | S-016 | 已创建 |
+| C-024 | 设计意图提取 | S-016 | 已创建 |
 
 ## 按分类索引
 
@@ -55,6 +57,8 @@
 - [[C-002-LLM-Wiki|LLM Wiki]]
 - [[C-003-增量编译|增量编译]]
 - [[C-004-持久化知识库|持久化知识库]]
+- [[C-023-社区发现|社区发现]]
+- [[C-024-设计意图提取|设计意图提取]]
 
 ### Obsidian 工具
 - [[C-005-Obsidian-Web-Clipper|Obsidian Web Clipper]]
